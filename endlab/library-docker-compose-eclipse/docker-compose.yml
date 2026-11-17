@@ -1,0 +1,22 @@
+services:
+  eureka-server:
+    build: ./eureka-server
+    container_name: eureka-server
+    ports:
+      - "8761:8761"
+
+  library-service:
+    build: ./library-service
+    container_name: library-service
+    ports:
+      - "8081:8081"
+    depends_on:
+      - eureka-server
+
+  payment-service:
+    build: ./payment-service
+    container_name: payment-service
+    ports:
+      - "8082:8082"
+    depends_on:
+      - eureka-server
